@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Player(
+data class TopPlayer(
     val id: Int,
     val position: String,
     @Json(name = "long_name") val longName: String,
