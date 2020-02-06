@@ -2,6 +2,7 @@ package com.foxsportsplayerstats.app.di
 
 import android.content.Context
 import com.foxsportsplayerstats.ui.match.MatchStatsViewModel
+import com.foxsportsplayerstats.ui.player.PlayerStatsViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,4 +20,6 @@ interface AppComponent {
     }
 
     fun matchStatsViewModelFactory(): ViewModelFactory<MatchStatsViewModel>
+
+    fun playerStatsViewModelFactory(): ViewModelFactory<PlayerStatsViewModel>
 }

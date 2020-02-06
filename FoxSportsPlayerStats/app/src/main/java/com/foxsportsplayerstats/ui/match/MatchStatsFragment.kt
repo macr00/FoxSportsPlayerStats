@@ -12,13 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
+import com.foxsportsplayerstats.domain.model.MatchStatsModel
+import com.foxsportsplayerstats.ui.UiView
 import com.foxsportsplayerstats.ui.onDestroyObservable
-import com.google.android.material.snackbar.Snackbar
+import com.foxsportsplayerstats.ui.showErrorSnackbar
 
-class MatchStatsFragment : Fragment() {
+class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
 
     companion object {
         const val TAG = "MatchStatsFragment"
+        @JvmStatic
         fun newInstance() = MatchStatsFragment()
     }
 
@@ -38,34 +41,37 @@ class MatchStatsFragment : Fragment() {
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.matchStatsObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .doOnDispose { Log.d(TAG, "onDispose") }
             .subscribe({ state ->
-                Log.d(TAG, state.log)
-                view.findViewById<TextView>(R.id.log_text).text = state.log
+                state.render(this)
             }) { t ->
-                Log.e(TAG, t.localizedMessage ?: "Unknown error")
-                showErrorSnackBar(view, t)
-            }
-
-        viewModel.errorObservable()
-            .takeUntil(viewLifecycleOwner.onDestroyObservable())
-            .doOnDispose { Log.d(TAG, "onDispose") }
-            .subscribe { t ->
-                showErrorSnackBar(view, t)
+                view.showErrorSnackbar(t) { viewModel.loadMatchStats() }
             }
     }
 
-    private fun showErrorSnackBar(view: View, t: Throwable) {
-        Snackbar.make(view, t.message ?: "ERROR", Snackbar.LENGTH_INDEFINITE).apply {
-            setAction("RETRY") {
-                viewModel.loadMatchStats()
-                dismiss()
-            }
-            show()
+    override fun displayModel(model: MatchStatsModel) {
+        val log = model.toString()
+        Log.d(TAG, log)
+        val textView = view?.findViewById<TextView>(R.id.log_text)
+        textView?.visibility = View.VISIBLE
+        textView?.text = log
+    }
+
+    override fun displayLoading(isLoading: Boolean) {
+        // TODO change loading view
+        val textView = view?.findViewById<TextView>(R.id.log_text)
+        if (isLoading) {
+            textView?.visibility = View.VISIBLE
+            textView?.text = "isLoading"
+        } else {
+            textView?.visibility = View.GONE
         }
     }
 
+    override fun displayError(throwable: Throwable) {
+        Log.e(TAG, throwable.localizedMessage ?: "Unknown error")
+        view?.showErrorSnackbar(throwable) { viewModel.loadMatchStats() }
+    }
 }

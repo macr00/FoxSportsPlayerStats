@@ -12,8 +12,8 @@ import io.reactivex.functions.Function
 import javax.inject.Inject
 
 data class GetPlayerStatsRequest(
-    val playerId: String,
-    val teamId: String
+    val teamId: Int,
+    val playerId: Int
 ): UseCaseRequest
 
 class GetPlayerStatsUseCase
@@ -33,7 +33,7 @@ constructor(
         }
 
     override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsModel>> {
-        return api.getPlayerDetailedStats(request.teamId, request.playerId)
+        return api.getPlayerDetailedStats(request.teamId.toString(), request.playerId.toString())
             .map(responseMapper)
             .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
             .startWith(UseCaseResponse.Loading())

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/match_stats_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.match.MatchStatsFragment">
+    tools:context=".ui.player.PlayerStatsFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/log_text"
-        android:layout_width="match_parent"
+        android:id="@+id/player_log"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </FrameLayout>

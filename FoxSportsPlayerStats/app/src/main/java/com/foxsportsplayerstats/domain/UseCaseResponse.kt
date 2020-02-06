@@ -6,5 +6,5 @@ sealed class UseCaseResponse<T> {
 
     data class Error<T>(val throwable: Throwable): UseCaseResponse<T>()
 
-    data class Success<T>(val data: T): UseCaseResponse<T>()
+    data class Success<T>(val model: T): UseCaseResponse<T>()
 }

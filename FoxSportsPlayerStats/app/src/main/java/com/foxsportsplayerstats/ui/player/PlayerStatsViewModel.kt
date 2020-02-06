@@ -1,48 +1,44 @@
-package com.foxsportsplayerstats.ui.match
+package com.foxsportsplayerstats.ui.player
 
 import android.util.Log
 import com.foxsportsplayerstats.domain.UseCaseResponse
-import com.foxsportsplayerstats.domain.match.GetMatchStatsRequest
-import com.foxsportsplayerstats.domain.match.GetMatchStatsUseCase
-import com.foxsportsplayerstats.domain.model.MatchStatsModel
+import com.foxsportsplayerstats.domain.model.PlayerStatsModel
+import com.foxsportsplayerstats.domain.player.GetPlayerStatsRequest
+import com.foxsportsplayerstats.domain.player.GetPlayerStatsUseCase
 import com.foxsportsplayerstats.ui.BaseViewModel
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class MatchStatsViewModel
+class PlayerStatsViewModel
 @Inject
 constructor(
-    private val getMatchStatsUseCase: GetMatchStatsUseCase
+    private val getPlayerStatsUseCase: GetPlayerStatsUseCase
 ) : BaseViewModel() {
 
     companion object {
-        const val TAG = "MatchStatsViewModel"
+        const val TAG = "PlayerDetailsViewModel"
     }
 
-    private var viewState = MatchStatsViewState()
-    private val viewStatePublisher = BehaviorSubject.create<MatchStatsViewState>()
+    private var viewState = PlayerStatsViewState()
+    private val viewStatePublisher = BehaviorSubject.create<PlayerStatsViewState>()
 
-    init {
-        loadMatchStats()
-    }
-
-    fun loadMatchStats() {
-        getMatchStatsUseCase.apply(GetMatchStatsRequest)
+    fun loadPlayer(teamId: Int, playerId: Int) {
+        getPlayerStatsUseCase.apply(GetPlayerStatsRequest(teamId = teamId, playerId = playerId))
             .subscribe({ response ->
-                when (response) {
+                when(response) {
                     is UseCaseResponse.Loading -> onLoading()
                     is UseCaseResponse.Success -> onSuccess(response.model)
                     is UseCaseResponse.Error -> onError(response.throwable)
                 }
             }, { throwable ->
                 onError(throwable)
-                Log.e(TAG, throwable.message ?: "Unknown Error")
+                Log.e(TAG, throwable.localizedMessage ?: "Unknown Error")
             })
             .disposeOnCleared()
     }
 
-    fun matchStatsObservable(): Observable<MatchStatsViewState> =
+    fun playerStatsObservable(): Observable<PlayerStatsViewState> =
         viewStatePublisher
             .startWith(viewState)
             .onErrorResumeNext(Observable.empty())
@@ -53,7 +49,7 @@ constructor(
         viewStatePublisher.onNext(viewState)
     }
 
-    private fun onSuccess(model: MatchStatsModel) {
+    private fun onSuccess(model: PlayerStatsModel) {
         viewState = viewState.copy(isLoading = false, error = null, model = model)
         viewStatePublisher.onNext(viewState)
     }
