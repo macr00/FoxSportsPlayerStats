@@ -1,7 +1,7 @@
-package com.foxsportsplayerstats.domain.player
+package com.foxsportsplayerstats.domain.model
 
 import com.foxsportsplayerstats.network.PlayerDetailedStats
 
-data class PlayerStatsData(
+data class PlayerStatsModel(
     val playerStats: PlayerDetailedStats
 )

@@ -4,6 +4,7 @@ import com.foxsportsplayerstats.domain.BaseUseCase
 import com.foxsportsplayerstats.domain.RxSchedulers
 import com.foxsportsplayerstats.domain.UseCaseRequest
 import com.foxsportsplayerstats.domain.UseCaseResponse
+import com.foxsportsplayerstats.domain.model.PlayerStatsModel
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.network.PlayerDetailedStats
 import io.reactivex.Observable
@@ -20,14 +21,18 @@ class GetPlayerStatsUseCase
 constructor(
     schedulers: RxSchedulers,
     private val api: FoxSportsApi
-) : BaseUseCase<GetPlayerStatsRequest, PlayerStatsData>(schedulers) {
+) : BaseUseCase<GetPlayerStatsRequest, PlayerStatsModel>(schedulers) {
 
     private val responseMapper =
-        Function<PlayerDetailedStats, UseCaseResponse<PlayerStatsData>> { stats ->
-            UseCaseResponse.Success(PlayerStatsData(stats))
+        Function<PlayerDetailedStats, UseCaseResponse<PlayerStatsModel>> { stats ->
+            UseCaseResponse.Success(
+                PlayerStatsModel(
+                    stats
+                )
+            )
         }
 
-    override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsData>> {
+    override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsModel>> {
         return api.getPlayerDetailedStats(request.teamId, request.playerId)
             .map(responseMapper)
             .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }

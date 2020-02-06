@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.foxsportsplayerstats.domain.UseCaseResponse
 import com.foxsportsplayerstats.domain.match.GetMatchStatsRequest
 import com.foxsportsplayerstats.domain.match.GetMatchStatsUseCase
-import com.foxsportsplayerstats.domain.match.MatchStatsData
+import com.foxsportsplayerstats.domain.model.MatchStatsModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
@@ -65,8 +65,8 @@ constructor(
         viewStatePublisher.onNext(viewState)
     }
 
-    private fun onSuccess(data: MatchStatsData) {
-        viewState = viewState.copy(isLoading = false, log = data.toString())
+    private fun onSuccess(model: MatchStatsModel) {
+        viewState = viewState.copy(isLoading = false, log = model.toString())
         viewStatePublisher.onNext(viewState)
     }
 

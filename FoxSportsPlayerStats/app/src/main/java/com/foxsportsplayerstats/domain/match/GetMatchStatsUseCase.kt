@@ -2,6 +2,7 @@ package com.foxsportsplayerstats.domain.match
 
 import android.util.Log
 import com.foxsportsplayerstats.domain.*
+import com.foxsportsplayerstats.domain.model.MatchStatsModel
 import com.foxsportsplayerstats.network.MatchStat
 import com.foxsportsplayerstats.network.FoxSportsApi
 import io.reactivex.Observable
@@ -15,14 +16,18 @@ class GetMatchStatsUseCase
 constructor(
     schedulers: RxSchedulers,
     private val api: FoxSportsApi
-) : BaseUseCase<GetMatchStatsRequest, MatchStatsData>(schedulers) {
+) : BaseUseCase<GetMatchStatsRequest, MatchStatsModel>(schedulers) {
 
     private val responseMapper =
-        Function<List<MatchStat>, UseCaseResponse<MatchStatsData>> { list ->
-            UseCaseResponse.Success(MatchStatsData(list))
+        Function<List<MatchStat>, UseCaseResponse<MatchStatsModel>> { list ->
+            UseCaseResponse.Success(
+                MatchStatsModel(
+                    list
+                )
+            )
         }
 
-    override fun useCaseObservable(request: GetMatchStatsRequest): Observable<UseCaseResponse<MatchStatsData>> {
+    override fun useCaseObservable(request: GetMatchStatsRequest): Observable<UseCaseResponse<MatchStatsModel>> {
         return api.getMatchStats()
             .map(responseMapper)
             .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
