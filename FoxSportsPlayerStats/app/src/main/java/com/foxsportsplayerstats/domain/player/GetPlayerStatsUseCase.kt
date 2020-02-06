@@ -4,10 +4,11 @@ import com.foxsportsplayerstats.domain.BaseUseCase
 import com.foxsportsplayerstats.domain.RxSchedulers
 import com.foxsportsplayerstats.domain.UseCaseRequest
 import com.foxsportsplayerstats.domain.UseCaseResponse
-import com.foxsportsplayerstats.network.MatchStatsApi
+import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.network.PlayerDetailedStats
 import io.reactivex.Observable
 import io.reactivex.functions.Function
+import javax.inject.Inject
 
 data class GetPlayerStatsRequest(
     val playerId: String,
@@ -15,9 +16,10 @@ data class GetPlayerStatsRequest(
 ): UseCaseRequest
 
 class GetPlayerStatsUseCase
+@Inject
 constructor(
     schedulers: RxSchedulers,
-    private val api: MatchStatsApi
+    private val api: FoxSportsApi
 ) : BaseUseCase<GetPlayerStatsRequest, PlayerStatsData>(schedulers) {
 
     private val responseMapper =
@@ -25,8 +27,8 @@ constructor(
             UseCaseResponse.Success(PlayerStatsData(stats))
         }
 
-    override fun useCaseObservable(upstream: Observable<GetPlayerStatsRequest>): Observable<UseCaseResponse<PlayerStatsData>> {
-        return upstream.switchMap { request -> api.getPlayerDetailedStats(request.teamId, request.playerId) }
+    override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsData>> {
+        return api.getPlayerDetailedStats(request.teamId, request.playerId)
             .map(responseMapper)
             .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
             .startWith(UseCaseResponse.Loading())
