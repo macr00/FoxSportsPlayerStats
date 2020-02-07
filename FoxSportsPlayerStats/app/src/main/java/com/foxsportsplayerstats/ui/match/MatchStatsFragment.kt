@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.foxsportsplayerstats.domain.model.MatchStatsModel
 import com.foxsportsplayerstats.ui.UiView
 import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
+import com.foxsportsplayerstats.ui.visibleOrGone
 
 class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
     TopPlayersAdapter.Listener {
@@ -64,24 +66,15 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
     }
 
     override fun displayModel(model: MatchStatsModel) {
-        val log = model.toString()
-        Log.d(TAG, log)
+        Log.d(TAG, model.toString())
         matchStatsAdapter.loadItems(model.matchStats)
     }
 
     override fun displayLoading(isLoading: Boolean) {
-        // TODO change loading view
-        val textView = view?.findViewById<TextView>(R.id.log_text)
-        if (isLoading) {
-            textView?.visibility = View.VISIBLE
-            textView?.text = "isLoading"
-        } else {
-            textView?.visibility = View.GONE
-        }
+        view?.findViewById<FrameLayout>(R.id.loading)?.visibleOrGone(isLoading)
     }
 
     override fun displayError(throwable: Throwable) {
-        Log.e(TAG, throwable.localizedMessage ?: "Unknown error")
         view?.showErrorSnackbar(throwable) { viewModel.loadMatchStats() }
     }
 
