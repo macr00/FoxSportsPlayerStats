@@ -55,7 +55,6 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
 
         viewModel.matchStatsObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
-            .doOnDispose { Log.d(TAG, "onDispose") }
             .subscribe({ state ->
                 state.render(this)
             }) { t ->
@@ -69,7 +68,7 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
     }
 
     override fun displayLoading(isLoading: Boolean) {
-        view?.findViewById<FrameLayout>(R.id.loading)?.visibleOrGone(isLoading)
+        view?.findViewById<FrameLayout>(R.id.loading_frame)?.visibleOrGone(isLoading)
     }
 
     override fun displayError(throwable: Throwable) {

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 
@@ -17,6 +18,7 @@ import com.foxsportsplayerstats.ui.UiView
 import com.foxsportsplayerstats.ui.match.MatchStatsFragment
 import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
+import com.foxsportsplayerstats.ui.visibleOrGone
 
 private const val TEAM_ID_PARAM = "teamId"
 private const val PLAYER_ID_PARAM = "playerId"
@@ -58,7 +60,6 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
         super.onViewCreated(view, savedInstanceState)
         viewModel.playerStatsObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
-            .doOnDispose { Log.d(TAG, "onDispose") }
             .subscribe({ state ->
                 state.render(this)
             }) { t ->
@@ -83,18 +84,10 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
     }
 
     override fun displayLoading(isLoading: Boolean) {
-        // TODO change loading view
-        val textView = view?.findViewById<TextView>(R.id.player_log)
-        if (isLoading) {
-            textView?.visibility = View.VISIBLE
-            textView?.text = "isLoading"
-        } else {
-            textView?.visibility = View.GONE
-        }
+        view?.findViewById<FrameLayout>(R.id.loading_frame)?.visibleOrGone(isLoading)
     }
 
     override fun displayError(throwable: Throwable) {
-        Log.e(MatchStatsFragment.TAG, throwable.localizedMessage ?: "Unknown error")
         view?.showErrorSnackbar(throwable) { loadPlayerStats() }
     }
 }

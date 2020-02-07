@@ -12,7 +12,6 @@
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/loading"
         layout="@layout/loading_layout"
         android:visibility="gone" />
 
