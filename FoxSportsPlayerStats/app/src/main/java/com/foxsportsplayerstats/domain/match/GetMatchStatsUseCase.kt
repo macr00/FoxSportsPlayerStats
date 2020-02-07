@@ -20,11 +20,7 @@ constructor(
 
     private val responseMapper =
         Function<List<MatchStat>, UseCaseResponse<MatchStatsModel>> { list ->
-            UseCaseResponse.Success(
-                MatchStatsModel(
-                    list
-                )
-            )
+            UseCaseResponse.Success(MatchStatsModel(list))
         }
 
     override fun useCaseObservable(request: GetMatchStatsRequest): Observable<UseCaseResponse<MatchStatsModel>> {

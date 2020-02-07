@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/match_stat_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/team_a_players"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/team_b_players"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type" >
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_a_player1" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_a_player2" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_a_player3" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_a_player4" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_a_player5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/team_b_players"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/team_a_players"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type" >
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_b_player1" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_b_player2" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_b_player3" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_b_player4" />
+
+            <include
+                layout="@layout/top_player_list_item"
+                android:id="@+id/team_b_player5" />
+
+
+        </LinearLayout>
+
+        <!-- <ListView
+            android:id="@+id/team_a_top_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type"
+            app:layout_constraintBottom_toBottomOf="parent" /> -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
