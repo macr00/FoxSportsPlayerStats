@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 
@@ -15,7 +14,7 @@ import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
 import com.foxsportsplayerstats.domain.model.PlayerStatsModel
 import com.foxsportsplayerstats.ui.UiView
-import com.foxsportsplayerstats.ui.match.MatchStatsFragment
+import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
 import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
 import com.foxsportsplayerstats.ui.visibleOrGone
@@ -58,12 +57,17 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout).setRetryClickListener {
+            loadPlayerStats()
+        }
+
         viewModel.playerStatsObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
                 state.render(this)
-            }) { t ->
-                view.showErrorSnackbar(t) { loadPlayerStats() }
+            }) { throwable ->
+                view.showErrorSnackbar(throwable)
             }
     }
 
@@ -83,11 +87,16 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
         textView?.text = log
     }
 
-    override fun displayLoading(isLoading: Boolean) {
-        view?.findViewById<FrameLayout>(R.id.loading_frame)?.visibleOrGone(isLoading)
+    override fun displayProgress(isLoading: Boolean) {
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showProgress(isLoading)
     }
 
     override fun displayError(throwable: Throwable) {
-        view?.showErrorSnackbar(throwable) { loadPlayerStats() }
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry(true)
+        view?.showErrorSnackbar(throwable)
+    }
+
+    override fun hideProgressRetry() {
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.visibleOrGone(false)
     }
 }

@@ -11,17 +11,16 @@ data class PlayerStatsViewState(
 
     fun render(view: UiView<PlayerStatsModel>) {
         view.run {
-            displayLoading(isLoading)
+            displayProgress(isLoading)
+
+            if (error != null)
+                displayError(error)
 
             if (model != null) {
+                hideProgressRetry()
                 displayModel(model)
-            }
-
-            if (error != null) {
-                displayError(error)
             }
         }
     }
-
 }
 

@@ -4,7 +4,9 @@ interface UiView<T> {
 
     fun displayModel(model: T)
 
-    fun displayLoading(isLoading: Boolean)
+    fun displayProgress(isLoading: Boolean)
 
     fun displayError(throwable: Throwable)
+
+    fun hideProgressRetry()
 }

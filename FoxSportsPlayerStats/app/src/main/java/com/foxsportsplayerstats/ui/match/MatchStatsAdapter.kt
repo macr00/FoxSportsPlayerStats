@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.MatchStat
-import com.foxsportsplayerstats.ui.ListLayout
+import com.foxsportsplayerstats.ui.layout.ListLayout
 
 class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
 

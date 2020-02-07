@@ -1,4 +1,4 @@
-package com.foxsportsplayerstats.ui
+package com.foxsportsplayerstats.ui.layout
 
 import android.content.Context
 import android.database.DataSetObserver

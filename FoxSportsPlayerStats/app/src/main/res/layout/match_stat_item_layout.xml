@@ -26,7 +26,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.foxsportsplayerstats.ui.ListLayout
+        <com.foxsportsplayerstats.ui.layout.ListLayout
             android:id="@+id/team_a_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintRight_toLeftOf="@id/team_b_list"
             app:layout_constraintTop_toBottomOf="@id/match_stat_type" />
 
-        <com.foxsportsplayerstats.ui.ListLayout
+        <com.foxsportsplayerstats.ui.layout.ListLayout
             android:id="@+id/team_b_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

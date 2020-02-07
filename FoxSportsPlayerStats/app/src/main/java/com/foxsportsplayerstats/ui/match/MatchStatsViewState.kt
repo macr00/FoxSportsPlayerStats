@@ -11,15 +11,16 @@ data class MatchStatsViewState(
 
     fun render(view: UiView<MatchStatsModel>) {
         view.run {
-            displayLoading(isLoading)
-
-            if (model != null)
-                displayModel(model)
+            displayProgress(isLoading)
 
             if (error != null)
                 displayError(error)
+
+            if (model != null) {
+                hideProgressRetry()
+                displayModel(model)
+            }
         }
     }
-
 }
 

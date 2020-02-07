@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <include layout="@layout/loading_layout"
-        android:visibility="gone"/>
+    <com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
+        android:id="@+id/progress_retry_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </FrameLayout>
