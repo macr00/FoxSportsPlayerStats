@@ -20,7 +20,8 @@ import com.foxsportsplayerstats.ui.UiView
 import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
 
-class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>, MatchStatsAdapter.Listener {
+class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
+    TopPlayersAdapter.Listener {
 
     companion object {
         const val TAG = "MatchStatsFragment"

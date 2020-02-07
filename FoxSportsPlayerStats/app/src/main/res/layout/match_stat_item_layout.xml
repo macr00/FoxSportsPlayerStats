@@ -18,83 +18,26 @@
             android:id="@+id/match_stat_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/team_a_players"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamA_top_players_rv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/team_b_players"
-            app:layout_constraintTop_toBottomOf="@id/match_stat_type" >
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_a_player1" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_a_player2" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_a_player3" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_a_player4" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_a_player5" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/team_b_players"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/team_a_players"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/match_stat_type" >
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_b_player1" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_b_player2" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_b_player3" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_b_player4" />
-
-            <include
-                layout="@layout/top_player_list_item"
-                android:id="@+id/team_b_player5" />
-
-
-        </LinearLayout>
-
-        <!-- <ListView
-            android:id="@+id/team_a_top_players"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/match_stat_type"
-            app:layout_constraintBottom_toBottomOf="parent" /> -->
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/teamB_top_players_rv"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamB_top_players_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/teamA_top_players_rv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
