@@ -13,19 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
 import com.foxsportsplayerstats.domain.model.PlayerStatsModel
-import com.foxsportsplayerstats.ui.UiView
+import com.foxsportsplayerstats.network.FoxSportsApi
+import com.foxsportsplayerstats.ui.*
 import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
-import com.foxsportsplayerstats.ui.onDestroyObservable
-import com.foxsportsplayerstats.ui.showErrorSnackbar
-import com.foxsportsplayerstats.ui.visibleOrGone
-
-private const val TEAM_ID_PARAM = "teamId"
-private const val PLAYER_ID_PARAM = "playerId"
 
 class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
 
     companion object {
         const val TAG = "PlayerStatsFragment"
+
+        private const val TEAM_ID_PARAM = "teamId"
+        private const val PLAYER_ID_PARAM = "playerId"
+
         @JvmStatic
         fun newInstance(teamId: Int, playerId: Int) =
             PlayerStatsFragment().apply {
@@ -82,9 +81,14 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
     override fun displayModel(model: PlayerStatsModel) {
         val log = model.toString()
         Log.d(TAG, log)
-        val textView = view?.findViewById<TextView>(R.id.player_log)
-        textView?.visibility = View.VISIBLE
-        textView?.text = log
+        view?.run {
+            findViewById<TextView>(R.id.player_full_name)?.text = model.data.fullName
+            findViewById<TextView>(R.id.player_position)?.text = model.data.position
+            loadPlayerHeadShot(
+                findViewById(R.id.player_head_shot),
+                FoxSportsApi.getImgUrl(model.data.id)
+            )
+        }
     }
 
     override fun displayProgress(isLoading: Boolean) {

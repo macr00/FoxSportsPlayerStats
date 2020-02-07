@@ -8,7 +8,13 @@ interface FoxSportsApi {
 
     companion object {
         const val BASE_URL = "https://statsapi.foxsports.com.au/3.0/api/sports/league/"
-        const val IMG_URL = "https://media.foxsports.com.au/match-centre/includes/images/headshots/landscape/nrl/"
+        private const val IMG_URL = "https://media.foxsports.com.au/match-centre/includes/images/headshots/landscape/nrl/"
+        private const val IMG_NOT_FOUND_URL = "https://media.foxsports.com.au/match-centre/includes/images/headshots/headshot-blank-large.jpg"
+
+        fun getImgUrl(id: Int): String = "$IMG_URL$id.jpg"
+
+        fun getEmptyImgUrl(): String = IMG_NOT_FOUND_URL
+
     }
 
     @GET("matches/NRL20190101/topplayerstats.json;type=fantasy_points;type=tackles;type=runs;type=run_metres?limit=5&userkey=A00239D3-45F6-4A0A-810C-54A347F144C2")

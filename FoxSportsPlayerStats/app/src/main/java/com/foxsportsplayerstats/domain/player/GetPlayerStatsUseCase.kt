@@ -25,11 +25,7 @@ constructor(
 
     private val responseMapper =
         Function<PlayerDetailedStats, UseCaseResponse<PlayerStatsModel>> { stats ->
-            UseCaseResponse.Success(
-                PlayerStatsModel(
-                    stats
-                )
-            )
+            UseCaseResponse.Success(PlayerStatsModel(stats))
         }
 
     override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsModel>> {

@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.network.TopPlayer
+import com.foxsportsplayerstats.ui.loadPlayerHeadShot
 
 class TopPlayersListAdapter(
     private val items: List<TopPlayer>,
@@ -56,12 +56,7 @@ class TopPlayersListAdapter(
                 topPlayer.jumperNumber,
                 topPlayer.shortName
             )
-
-            Glide.with(parent)
-                .load(FoxSportsApi.IMG_URL + "$id.jpg")
-                .error(R.drawable.ic_launcher_foreground)
-                .centerCrop()
-                .into(imageView)
+            parent.loadPlayerHeadShot(imageView, FoxSportsApi.getImgUrl(id))
 
             if (parent.context !is Listener) {
                 Log.d(TAG, "Activity must implement TopPlayersListAdapter.Listener")
