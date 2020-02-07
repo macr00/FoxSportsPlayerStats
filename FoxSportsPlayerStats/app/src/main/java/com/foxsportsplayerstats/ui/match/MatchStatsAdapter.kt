@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.MatchStat
-import com.foxsportsplayerstats.network.TopPlayer
+import com.foxsportsplayerstats.network.Team
 
 class MatchStatsAdapter(
     private val listener: TopPlayersAdapter.Listener
@@ -40,32 +40,32 @@ class MatchStatsAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val statTitle = itemView.findViewById<TextView>(R.id.match_stat_type)
         private val rvTeamA = itemView.findViewById<RecyclerView>(R.id.teamA_top_players_rv)
         private val rvTeamB = itemView.findViewById<RecyclerView>(R.id.teamB_top_players_rv)
-
-        private val statType = itemView.findViewById<TextView>(R.id.match_stat_type)
 
         fun bind(
             matchStat: MatchStat,
             pool: RecyclerView.RecycledViewPool,
             listener: TopPlayersAdapter.Listener
         ) {
-            Log.d("ViewHolder", matchStat.toString())
-            statType.text = matchStat.statType
-
-            setUpRecycler(rvTeamA, matchStat.teamA.topPlayers, pool, listener)
-            setUpRecycler(rvTeamB, matchStat.teamB.topPlayers, pool, listener)
+            with(matchStat) {
+                statTitle.text = matchStat.statType.replace("_", " ")
+                setUpRecycler(teamA, rvTeamA, pool, listener)
+                setUpRecycler(teamB, rvTeamB, pool, listener)
+            }
         }
 
         private fun setUpRecycler(
+            team: Team,
             recyclerView: RecyclerView,
-            players: List<TopPlayer>,
             pool: RecyclerView.RecycledViewPool,
             listener: TopPlayersAdapter.Listener
         ) {
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(itemView.context, RecyclerView.VERTICAL, false)
-                adapter = TopPlayersAdapter(players, listener)
+                adapter = TopPlayersAdapter(team.topPlayers, team.id, listener)
+                setHasFixedSize(true)
                 setRecycledViewPool(pool)
             }
         }

@@ -5,6 +5,7 @@ buildscript {
     ext.retrofit_version = '2.4.0'
     ext.moshi_version = '1.9.2'
     ext.dagger_version = '2.19'
+    ext.glide_version = '4.11.0'
 
     repositories {
         google()

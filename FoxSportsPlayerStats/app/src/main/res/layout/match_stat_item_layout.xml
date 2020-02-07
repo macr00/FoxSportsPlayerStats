@@ -12,13 +12,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/match_stat_type"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

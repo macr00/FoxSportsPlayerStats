@@ -47,7 +47,6 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         view.findViewById<RecyclerView>(R.id.match_stats_rv).run {
             this.layoutManager = LinearLayoutManager(view.context)
             this.adapter = matchStatsAdapter
@@ -68,12 +67,6 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
         val log = model.toString()
         Log.d(TAG, log)
         matchStatsAdapter.loadItems(model.matchStats)
-        /*
-        val textView = view?.findViewById<TextView>(R.id.log_text)
-        textView?.visibility = View.VISIBLE
-        textView?.text = log
-        */
-
     }
 
     override fun displayLoading(isLoading: Boolean) {
