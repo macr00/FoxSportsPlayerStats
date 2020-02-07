@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +21,7 @@ import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
 import com.foxsportsplayerstats.ui.visibleOrGone
 
-class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
-    TopPlayersAdapter.Listener {
+class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
 
     companion object {
         const val TAG = "MatchStatsFragment"
@@ -36,7 +34,7 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
             .get(MatchStatsViewModel::class.java)
     }
 
-    private val matchStatsAdapter = MatchStatsAdapter(this)
+    private val matchStatsAdapter = MatchStatsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,11 +74,5 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel>,
 
     override fun displayError(throwable: Throwable) {
         view?.showErrorSnackbar(throwable) { viewModel.loadMatchStats() }
-    }
-
-    override fun onPlayerClicked(teamId: Int, playerId: Int) {
-        activity?.let {
-            Toast.makeText(it, "Team: $teamId, Player: $playerId", Toast.LENGTH_LONG).show()
-        }
     }
 }

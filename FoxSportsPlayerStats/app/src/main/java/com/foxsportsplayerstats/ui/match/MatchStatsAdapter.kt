@@ -1,22 +1,17 @@
 package com.foxsportsplayerstats.ui.match
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.MatchStat
-import com.foxsportsplayerstats.network.Team
+import com.foxsportsplayerstats.ui.ListLayout
 
-class MatchStatsAdapter(
-    private val listener: TopPlayersAdapter.Listener
-) : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
+class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
 
     private val items: ArrayList<MatchStat> = arrayListOf()
-    private val pool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.match_stat_item_layout, parent, false))
@@ -27,7 +22,7 @@ class MatchStatsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], pool, listener)
+        holder.bind(items[position])
     }
 
     fun loadItems(items: List<MatchStat>) {
@@ -41,32 +36,14 @@ class MatchStatsAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val statTitle = itemView.findViewById<TextView>(R.id.match_stat_type)
-        private val rvTeamA = itemView.findViewById<RecyclerView>(R.id.teamA_top_players_rv)
-        private val rvTeamB = itemView.findViewById<RecyclerView>(R.id.teamB_top_players_rv)
+        private val teamAList = itemView.findViewById<ListLayout>(R.id.team_a_list)
+        private val teamBList = itemView.findViewById<ListLayout>(R.id.team_b_list)
 
-        fun bind(
-            matchStat: MatchStat,
-            pool: RecyclerView.RecycledViewPool,
-            listener: TopPlayersAdapter.Listener
-        ) {
+        fun bind(matchStat: MatchStat) {
             with(matchStat) {
                 statTitle.text = matchStat.statType.replace("_", " ")
-                setUpRecycler(teamA, rvTeamA, pool, listener)
-                setUpRecycler(teamB, rvTeamB, pool, listener)
-            }
-        }
-
-        private fun setUpRecycler(
-            team: Team,
-            recyclerView: RecyclerView,
-            pool: RecyclerView.RecycledViewPool,
-            listener: TopPlayersAdapter.Listener
-        ) {
-            recyclerView.apply {
-                layoutManager = LinearLayoutManager(itemView.context, RecyclerView.VERTICAL, false)
-                adapter = TopPlayersAdapter(team.topPlayers, team.id, listener)
-                setHasFixedSize(true)
-                setRecycledViewPool(pool)
+                teamAList.setAdapter(TopPlayersListAdapter(teamA.topPlayers, teamA.id, itemView.context))
+                teamBList.setAdapter(TopPlayersListAdapter(teamB.topPlayers, teamB.id, itemView.context))
             }
         }
     }

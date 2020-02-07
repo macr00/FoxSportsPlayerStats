@@ -2,9 +2,11 @@ package com.foxsportsplayerstats
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.foxsportsplayerstats.ui.match.MatchStatsFragment
+import com.foxsportsplayerstats.ui.match.TopPlayersListAdapter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TopPlayersListAdapter.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,5 +16,11 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container_layout, MatchStatsFragment.newInstance())
                 .commitNow()
         }
+    }
+
+    override fun onPlayerClicked(teamId: Int, playerId: Int) {
+        Toast.makeText(this, "Team: $teamId, Player: $playerId", Toast.LENGTH_LONG).show()
+
+        // TODO add PlayerStatsFragment to stack
     }
 }

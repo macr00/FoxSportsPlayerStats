@@ -16,31 +16,33 @@
 
         <TextView
             android:id="@+id/match_stat_type"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textStyle="bold"
             android:textAllCaps="true"
-            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/teamA_top_players_rv"
+        <com.foxsportsplayerstats.ui.ListLayout
+            android:id="@+id/team_a_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/match_stat_type"
+            android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/teamB_top_players_rv"/>
+            app:layout_constraintRight_toLeftOf="@id/team_b_list"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/teamB_top_players_rv"
+        <com.foxsportsplayerstats.ui.ListLayout
+            android:id="@+id/team_b_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/match_stat_type"
+            android:orientation="vertical"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/teamA_top_players_rv" />
+            app:layout_constraintLeft_toRightOf="@id/team_a_list"
+            app:layout_constraintTop_toBottomOf="@id/match_stat_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

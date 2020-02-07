@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FoxSportsPlayerStats</string>
     <string name="player_name_jumper">%1$s. %2$s</string>
+    <string name="player_image">Player Image</string>
 </resources>

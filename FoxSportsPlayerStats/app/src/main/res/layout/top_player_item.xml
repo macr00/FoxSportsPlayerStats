@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/top_player_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:contentDescription="@string/player_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
