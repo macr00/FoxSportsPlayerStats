@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
@@ -34,6 +36,8 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
                 }
             }
     }
+
+    private val playerStatsAdapter = PlayerStatsAdapter()
 
     private val viewModel: PlayerStatsViewModel by lazy {
         ViewModelProvider(this, (activity!!.injector.playerStatsViewModelFactory()))
@@ -61,6 +65,11 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
             loadPlayerStats()
         }
 
+        view.findViewById<RecyclerView>(R.id.player_stats_rv).run {
+            this.layoutManager = LinearLayoutManager(view.context)
+            this.adapter = playerStatsAdapter
+        }
+
         viewModel.playerStatsObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
@@ -84,6 +93,7 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
         view?.run {
             findViewById<TextView>(R.id.player_full_name)?.text = model.data.fullName
             findViewById<TextView>(R.id.player_position)?.text = model.data.position
+            playerStatsAdapter.loadItems(model.data.getLastMatchStatPairs())
             loadPlayerHeadShot(
                 findViewById(R.id.player_head_shot),
                 FoxSportsApi.getImgUrl(model.data.id)

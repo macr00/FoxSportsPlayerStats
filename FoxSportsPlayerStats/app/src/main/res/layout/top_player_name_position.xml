@@ -9,7 +9,7 @@
         android:id="@+id/top_player_name_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_gravity="start" />
 
     <TextView

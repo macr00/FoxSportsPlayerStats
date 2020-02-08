@@ -28,12 +28,12 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
         fun newInstance() = MatchStatsFragment()
     }
 
+    private val matchStatsAdapter = MatchStatsAdapter()
+
     private val viewModel: MatchStatsViewModel by lazy {
         ViewModelProvider(this, (activity!!.injector.matchStatsViewModelFactory()))
             .get(MatchStatsViewModel::class.java)
     }
-
-    private val matchStatsAdapter = MatchStatsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +54,6 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
         view.findViewById<RecyclerView>(R.id.match_stats_rv).run {
             this.layoutManager = LinearLayoutManager(view.context)
             this.adapter = matchStatsAdapter
-            setHasFixedSize(true)
         }
 
         viewModel.matchStatsObservable()

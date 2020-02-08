@@ -7,14 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.MatchStat
+import com.foxsportsplayerstats.ui.capitalizeWords
 import com.foxsportsplayerstats.ui.layout.ListLayout
 
 class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
 
-    private val items: ArrayList<MatchStat> = arrayListOf()
+    private var items: List<MatchStat> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.match_stat_item_layout, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.match_stat_item_layout, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -26,10 +29,7 @@ class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
     }
 
     fun loadItems(items: List<MatchStat>) {
-        this.items.run {
-            clear()
-            addAll(items)
-        }
+        this.items = items
         notifyDataSetChanged()
     }
 
@@ -42,8 +42,8 @@ class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
         fun bind(matchStat: MatchStat) {
             with(matchStat) {
                 statTitle.text = matchStat.statType.replace("_", " ")
-                teamAList.setAdapter(TopPlayersListAdapter(teamA.topPlayers, teamA.id, itemView.context))
-                teamBList.setAdapter(TopPlayersListAdapter(teamB.topPlayers, teamB.id, itemView.context))
+                teamAList.setAdapter(TopPlayersListAdapter(itemView.context, teamA.topPlayers, teamA.id))
+                teamBList.setAdapter(TopPlayersListAdapter(itemView.context, teamB.topPlayers, teamB.id, true))
             }
         }
     }

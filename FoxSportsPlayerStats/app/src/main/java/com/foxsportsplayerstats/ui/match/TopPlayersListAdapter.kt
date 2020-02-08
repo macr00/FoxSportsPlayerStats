@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.network.TopPlayer
 import com.foxsportsplayerstats.ui.loadPlayerHeadShot
 
 class TopPlayersListAdapter(
+    context: Context,
     private val items: List<TopPlayer>,
     private val teamId: Int,
-    context: Context
+    private val rtl: Boolean = false
 ) : ArrayAdapter<TopPlayer>(context, 0, items) {
 
     companion object {
@@ -30,6 +32,8 @@ class TopPlayersListAdapter(
         // Inflate view and create ViewHolder if null
         if (v == null) {
             v = LayoutInflater.from(parent.context).inflate(R.layout.top_player_item, parent, false)
+
+            if(rtl) (v as ViewGroup).layoutDirection = View.LAYOUT_DIRECTION_RTL
 
             viewHolder = ViewHolder().apply {
                 imageView = v.findViewById(R.id.top_player_image)

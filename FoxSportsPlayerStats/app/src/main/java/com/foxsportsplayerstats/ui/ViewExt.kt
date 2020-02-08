@@ -49,3 +49,6 @@ fun View.loadPlayerHeadShot(imageView: ImageView, url: String) {
         })
         .into(imageView)
 }
+
+fun String.capitalizeWords(): String = split("_").map { it.capitalize() }.joinToString(" ")
+

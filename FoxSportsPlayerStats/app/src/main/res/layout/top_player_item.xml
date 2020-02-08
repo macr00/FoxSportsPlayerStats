@@ -27,6 +27,8 @@
         app:layout_constraintBottom_toBottomOf="@id/top_player_image"
         app:layout_constraintStart_toEndOf="@id/top_player_image"/>
 
+    <!-- TODO add info views directly -->
+
     <include
         layout="@layout/top_player_name_position"
         android:layout_height="wrap_content"
