@@ -20,12 +20,10 @@ class MainActivity : AppCompatActivity(), TopPlayersListAdapter.Listener {
     }
 
     override fun onPlayerClicked(teamId: Int, playerId: Int) {
-        Toast.makeText(this, "Team: $teamId, Player: $playerId", Toast.LENGTH_LONG).show()
-        val ft = supportFragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction()
             .add(R.id.container_layout, PlayerStatsFragment.newInstance(teamId, playerId))
             .addToBackStack(PlayerStatsFragment.TAG)
-
-        ft.commit()
+            .run { commit() }
     }
 
     override fun onBackPressed() {

@@ -33,7 +33,7 @@ fun View.loadPlayerHeadShot(imageView: ImageView, url: String) {
                 target: Target<Drawable>?,
                 isFirstResource: Boolean
             ): Boolean {
-                loadPlayerHeadShot(imageView, FoxSportsApi.getEmptyImgUrl())
+                loadEmptyHeadShot(imageView)
                 return false
             }
 
@@ -50,5 +50,14 @@ fun View.loadPlayerHeadShot(imageView: ImageView, url: String) {
         .into(imageView)
 }
 
-fun String.capitalizeWords(): String = split("_").map { it.capitalize() }.joinToString(" ")
+fun View.loadEmptyHeadShot(imageView: ImageView) {
+    Glide.with(this.context)
+        .load(FoxSportsApi.getEmptyImgUrl())
+        .error(R.drawable.ic_launcher_foreground)
+        .centerCrop()
+        .into(imageView)
+}
+
+fun String.capitalizeWords(): String =
+    split("_").joinToString(" ") { it.capitalize() }
 

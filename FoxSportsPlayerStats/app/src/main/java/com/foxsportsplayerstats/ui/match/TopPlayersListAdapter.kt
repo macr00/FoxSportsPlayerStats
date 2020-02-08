@@ -61,13 +61,14 @@ class TopPlayersListAdapter(
                 topPlayer.shortName
             )
             parent.loadPlayerHeadShot(imageView, FoxSportsApi.getImgUrl(id))
+        }
 
-            if (parent.context !is Listener) {
-                Log.d(TAG, "Activity must implement TopPlayersListAdapter.Listener")
-            } else {
-                imageView.setOnClickListener {
-                    (parent.context as Listener).onPlayerClicked(teamId, topPlayer.id)
-                }
+        // Set onClick listener
+        if (parent.context !is Listener) {
+            Log.d(TAG, "Activity must implement TopPlayersListAdapter.Listener")
+        } else {
+            v!!.setOnClickListener {
+                (parent.context as Listener).onPlayerClicked(teamId, topPlayer.id)
             }
         }
 
