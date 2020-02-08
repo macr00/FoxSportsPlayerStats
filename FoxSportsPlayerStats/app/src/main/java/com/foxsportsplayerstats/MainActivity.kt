@@ -14,8 +14,7 @@ class MainActivity : AppCompatActivity(), TopPlayersListAdapter.Listener {
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container_layout, PlayerStatsFragment.newInstance(55015, 113187))
-                //.replace(R.id.container_layout, MatchStatsFragment.newInstance())
+                .replace(R.id.container_layout, MatchStatsFragment.newInstance())
                 .commitNow()
         }
     }
