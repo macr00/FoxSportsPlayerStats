@@ -4,7 +4,7 @@ import com.foxsportsplayerstats.RxSchedulersTesting
 import com.foxsportsplayerstats.domain.Repository
 import com.foxsportsplayerstats.domain.UseCaseResponse
 import com.foxsportsplayerstats.domain.model.MatchStatModel
-import com.foxsportsplayerstats.domain.model.buildMatchStat
+import com.foxsportsplayerstats.domain.model.buildMatchStatModel
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Assert
@@ -22,9 +22,9 @@ class GetMatchStatsUseCaseTest {
 
     @Test
     fun loadingThenSuccessResponseWhenRepositoryReturnsModel() {
-        val matchStat0 = buildMatchStat(id = "match_stat_0")
-        val matchStat1 = buildMatchStat(id = "match_stat_1")
-        val matchStat2 = buildMatchStat(id = "match_stat_2")
+        val matchStat0 = buildMatchStatModel(id = "match_stat_0")
+        val matchStat1 = buildMatchStatModel(id = "match_stat_1")
+        val matchStat2 = buildMatchStatModel(id = "match_stat_2")
         val actual = listOf(matchStat0, matchStat1, matchStat2)
 
         `when`(repository.getMatchStats()).thenReturn(Observable.just(actual))

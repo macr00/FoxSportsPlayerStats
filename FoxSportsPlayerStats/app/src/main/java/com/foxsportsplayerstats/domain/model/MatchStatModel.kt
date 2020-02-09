@@ -10,7 +10,7 @@ data class MatchStatModel(
 )
 
 @VisibleForTesting
-fun buildMatchStat(
+fun buildMatchStatModel(
     id: String = "match_stat_id",
     teamA: TeamModel = buildTeam(),
     teamB: TeamModel = buildTeam(),

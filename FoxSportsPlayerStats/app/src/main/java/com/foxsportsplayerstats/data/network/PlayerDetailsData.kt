@@ -1,5 +1,6 @@
 package com.foxsportsplayerstats.data.network
 
+import androidx.annotation.VisibleForTesting
 import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -31,3 +32,14 @@ fun Map<String, Int?>.toPairs(): List<Pair<String, Int>> {
 
     return pairs
 }
+
+@VisibleForTesting
+fun buildPlayerData(
+    id: Int,
+    surname: String = "surname",
+    position: String = "position",
+    fullName: String = "fullname",
+    lastMatchStats: Map<String, Int?> = emptyMap()
+) = PlayerDetailsData(
+    id = id, surname = surname, position = position, fullName = fullName, lastMatchStats = lastMatchStats
+)
