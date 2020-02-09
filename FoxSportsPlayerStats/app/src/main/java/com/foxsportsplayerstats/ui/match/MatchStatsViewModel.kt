@@ -23,10 +23,6 @@ constructor(
     private var viewState = MatchStatsViewState()
     private val viewStatePublisher = BehaviorSubject.create<MatchStatsViewState>()
 
-    init {
-        loadMatchStats()
-    }
-
     fun loadMatchStats() {
         getMatchStatsUseCase.apply(GetMatchStatsRequest)
             .subscribe({ response ->
@@ -44,7 +40,6 @@ constructor(
 
     fun matchStatsObservable(): Observable<MatchStatsViewState> =
         viewStatePublisher
-            .startWith(viewState)
             .onErrorResumeNext(Observable.empty())
             .hide()
 

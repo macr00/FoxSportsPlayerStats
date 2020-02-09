@@ -45,7 +45,6 @@ constructor(
 
     fun playerStatsObservable(): Observable<PlayerStatsViewState> =
         viewStatePublisher
-            .startWith(viewState)
             .onErrorResumeNext(Observable.empty())
             .hide()
 
