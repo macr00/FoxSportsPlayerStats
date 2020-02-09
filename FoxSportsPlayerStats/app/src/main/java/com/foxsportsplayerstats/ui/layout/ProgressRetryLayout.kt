@@ -2,10 +2,10 @@ package com.foxsportsplayerstats.ui.layout
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.foxsportsplayerstats.R
+import com.foxsportsplayerstats.ui.inflate
 import com.foxsportsplayerstats.ui.visibleOrGone
 import kotlinx.android.synthetic.main.progress_retry_layout.view.*
 
@@ -15,7 +15,7 @@ class ProgressRetryLayout
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.progress_retry_layout, this, true)
+        inflate(R.layout.progress_retry_layout, true)
     }
 
     fun showProgress(show: Boolean) {

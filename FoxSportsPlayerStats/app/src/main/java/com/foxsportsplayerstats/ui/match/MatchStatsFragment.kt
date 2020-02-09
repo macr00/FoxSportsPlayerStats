@@ -66,7 +66,6 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
     }
 
     override fun displayModel(model: MatchStatsModel) {
-        Log.d(TAG, model.toString())
         matchStatsAdapter.loadItems(model.matchStats)
     }
 
@@ -75,8 +74,10 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
     }
 
     override fun displayError(throwable: Throwable) {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry(true)
-        view?.showErrorSnackbar(throwable)
+        view?.run {
+            findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry(true)
+            showErrorSnackbar(throwable)
+        }
     }
 
     override fun hideProgressRetry() {

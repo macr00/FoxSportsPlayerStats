@@ -1,7 +1,9 @@
 package com.foxsportsplayerstats.ui
 
 import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -11,6 +13,10 @@ import com.bumptech.glide.request.target.Target
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.google.android.material.snackbar.Snackbar
+
+fun ViewGroup.inflate(resId: Int, attach: Boolean): View {
+    return LayoutInflater.from(context).inflate(resId, this, attach)
+}
 
 fun View.visibleOrGone(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
@@ -23,7 +29,6 @@ fun View.showErrorSnackbar(t: Throwable) {
 fun View.loadPlayerHeadShot(imageView: ImageView, url: String) {
     Glide.with(this.context)
         .load(url)
-        .error(R.drawable.ic_launcher_foreground)
         .centerCrop()
         .listener(object : RequestListener<Drawable> {
 
@@ -53,7 +58,6 @@ fun View.loadPlayerHeadShot(imageView: ImageView, url: String) {
 fun View.loadEmptyHeadShot(imageView: ImageView) {
     Glide.with(this.context)
         .load(FoxSportsApi.getEmptyImgUrl())
-        .error(R.drawable.ic_launcher_foreground)
         .centerCrop()
         .into(imageView)
 }

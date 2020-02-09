@@ -1,13 +1,12 @@
 package com.foxsportsplayerstats.ui.match
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.MatchStat
-import com.foxsportsplayerstats.ui.capitalizeWords
+import com.foxsportsplayerstats.ui.inflate
 import com.foxsportsplayerstats.ui.layout.ListLayout
 
 class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
@@ -15,9 +14,7 @@ class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
     private var items: List<MatchStat> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.match_stat_item_layout, parent, false)
-        )
+        return ViewHolder(parent.inflate(R.layout.match_stat_item_layout, false))
     }
 
     override fun getItemCount(): Int {

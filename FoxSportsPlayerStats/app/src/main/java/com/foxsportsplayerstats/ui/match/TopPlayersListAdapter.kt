@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.network.TopPlayer
+import com.foxsportsplayerstats.ui.inflate
 import com.foxsportsplayerstats.ui.loadPlayerHeadShot
 
 class TopPlayersListAdapter(
@@ -31,7 +32,7 @@ class TopPlayersListAdapter(
 
         // Inflate view and create ViewHolder if null
         if (v == null) {
-            v = LayoutInflater.from(parent.context).inflate(R.layout.top_player_item, parent, false)
+            v = parent.inflate(R.layout.top_player_item, false)
 
             if(rtl) (v as ViewGroup).layoutDirection = View.LAYOUT_DIRECTION_RTL
 

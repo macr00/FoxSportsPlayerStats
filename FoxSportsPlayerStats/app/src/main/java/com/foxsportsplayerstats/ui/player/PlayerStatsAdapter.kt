@@ -1,23 +1,20 @@
 package com.foxsportsplayerstats.ui.player
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.ui.capitalizeWords
+import com.foxsportsplayerstats.ui.inflate
 
-class PlayerStatsAdapter() : RecyclerView.Adapter<PlayerStatsAdapter.ViewHolder>() {
+class PlayerStatsAdapter : RecyclerView.Adapter<PlayerStatsAdapter.ViewHolder>() {
 
     private var items: List<Pair<String, Int>> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.player_stat_cell, parent, false)
-        )
+        return ViewHolder(parent.inflate(R.layout.player_stat_cell, false))
     }
 
     override fun getItemCount(): Int {
