@@ -8,6 +8,7 @@
     tools:context=".ui.player.PlayerStatsFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
