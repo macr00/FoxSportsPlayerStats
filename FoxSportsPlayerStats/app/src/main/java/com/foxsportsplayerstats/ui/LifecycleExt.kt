@@ -8,6 +8,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.Observable
 
 fun LifecycleOwner.onDestroyObservable(): Observable<Unit> {
+    val tag = this.javaClass.name
     return Observable.create { emitter ->
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
             emitter.onNext(Unit)
@@ -17,7 +18,7 @@ fun LifecycleOwner.onDestroyObservable(): Observable<Unit> {
         lifecycle.addObserver(object : LifecycleObserver {
             @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
             fun onDestroy() {
-                Log.d("Lifecycle", "onDestroy")
+                Log.d(tag, "onDestroy")
                 if (!emitter.isDisposed) {
                     emitter.onNext(Unit)
                     emitter.onComplete()
