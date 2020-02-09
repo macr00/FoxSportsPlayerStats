@@ -8,10 +8,12 @@
     tools:context=".ui.player.PlayerStatsFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,12 +22,12 @@
 
             <ImageView
                 android:id="@+id/player_head_shot"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_margin="16dp"
+                android:layout_width="@dimen/player_head_profile"
+                android:layout_height="@dimen/player_head_profile"
+                android:layout_margin="@dimen/margin_large"
                 android:contentDescription="@string/player_image"
                 android:layout_gravity="center"
-                tools:src="@drawable/ic_launcher_foreground" />
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/player_full_name"
@@ -49,7 +51,7 @@
                 android:id="@+id/player_stats_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/player_position" />
@@ -60,9 +62,11 @@
 
     <com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
         android:id="@+id/progress_retry_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
