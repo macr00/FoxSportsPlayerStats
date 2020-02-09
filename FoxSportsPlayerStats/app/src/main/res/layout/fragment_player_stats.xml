@@ -31,10 +31,12 @@
 
             <TextView
                 android:id="@+id/player_full_name"
-                style="@style/TextAppearance.AppCompat.Display1"
+                style="@style/PlayerInfoTitle"
+                android:gravity="center"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
                 android:layout_gravity="center"
                 tools:text="Player Name" />
 

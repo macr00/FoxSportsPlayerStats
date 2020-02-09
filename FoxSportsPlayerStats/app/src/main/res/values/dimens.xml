@@ -5,4 +5,5 @@
     <dimen name="margin_small">4dp</dimen>
     <dimen name="player_head_list_item">68dp</dimen>
     <dimen name="player_head_profile">160dp</dimen>
+    <dimen name="player_title_text_size">34sp</dimen>
 </resources>
