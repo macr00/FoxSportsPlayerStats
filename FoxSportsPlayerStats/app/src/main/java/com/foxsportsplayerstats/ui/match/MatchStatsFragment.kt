@@ -43,16 +43,15 @@ class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout).setRetryClickListener {
-            viewModel.loadMatchStats()
-        }
+        view.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)
+            .setRetryClickListener { viewModel.loadMatchStats() }
 
         view.findViewById<RecyclerView>(R.id.match_stats_rv).run {
             this.layoutManager = LinearLayoutManager(view.context)
             this.adapter = matchStatsAdapter
         }
 
-        viewModel.matchStatsObservable()
+        viewModel.viewStateObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
                 state.render(this)

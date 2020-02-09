@@ -1,6 +1,6 @@
 package com.foxsportsplayerstats.ui
 
-open class ViewState<T>(
+abstract class ViewState<T>(
     private val model: T? = null,
     private val error: Throwable? = null,
     private val isLoading: Boolean = false
@@ -20,4 +20,10 @@ open class ViewState<T>(
                 displayError(error)
         }
     }
+
+    abstract fun onLoading(): ViewState<T>
+
+    abstract fun onSuccess(t: T): ViewState<T>
+
+    abstract fun onError(throwable: Throwable): ViewState<T>
 }

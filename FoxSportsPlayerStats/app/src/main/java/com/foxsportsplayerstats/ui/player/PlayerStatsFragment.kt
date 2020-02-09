@@ -59,16 +59,15 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout).setRetryClickListener {
-            loadPlayerStats()
-        }
+        view.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)
+            .setRetryClickListener { loadPlayerStats() }
 
         view.findViewById<RecyclerView>(R.id.player_stats_rv).run {
             this.layoutManager = LinearLayoutManager(view.context)
             this.adapter = playerStatsAdapter
         }
 
-        viewModel.playerStatsObservable()
+        viewModel.viewStateObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
                 state.render(this)
