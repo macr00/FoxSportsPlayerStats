@@ -61,10 +61,9 @@ class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
         viewModel.viewStateObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
-                Log.d(TAG, "rendered")
                 state.render(this)
             }) { throwable ->
-                view.showErrorSnackbar(throwable)
+                displayError(throwable)
             }
     }
 

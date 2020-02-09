@@ -18,7 +18,6 @@ constructor(
 
     init {
         viewState = MatchStatsViewState()
-        loadMatchStats()
     }
 
     fun loadMatchStats() {

@@ -71,15 +71,13 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
         viewModel.viewStateObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
-                Log.d(TAG, "Rendered")
                 state.render(this)
             }) { throwable ->
-                view.showErrorSnackbar(throwable)
+                displayError(throwable)
             }
     }
 
     private fun loadPlayerStats() {
-        Log.d(TAG, "load player stats")
         arguments?.let {
             val teamId = it.getInt(TEAM_ID_PARAM)
             val playerId = it.getInt(PLAYER_ID_PARAM)
