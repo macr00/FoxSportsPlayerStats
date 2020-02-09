@@ -20,5 +20,10 @@ fun buildTopPlayer(
     jumperNumber: Int = 99,
     statValue: Int = 0
 ) = TopPlayerStatModel(
-    id = id, teamId = teamId, name = name, position = position, jumperNumber = jumperNumber, statValue = statValue
+    id = id,
+    teamId = teamId,
+    name = name,
+    position = position,
+    jumperNumber = jumperNumber,
+    statValue = statValue
 )

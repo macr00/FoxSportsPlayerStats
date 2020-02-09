@@ -6,10 +6,7 @@ import io.reactivex.Observable
 import io.reactivex.functions.Function
 import javax.inject.Inject
 
-data class GetPlayerStatsRequest(
-    val teamId: Int,
-    val playerId: Int
-): UseCaseRequest
+data class GetPlayerStatsRequest(val teamId: Int, val playerId: Int): UseCaseRequest
 
 class GetPlayerStatsUseCase
 @Inject

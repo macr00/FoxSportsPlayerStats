@@ -18,5 +18,9 @@ fun buildPlayerDetailsModel(
     position: String = "Position",
     lastMatchStats: List<Pair<String, Int>> = emptyList()
 ) = PlayerDetailsModel(
-  id = id, surname = surname, fullName = fullName, position = position, lastMatchStats = lastMatchStats
+    id = id,
+    surname = surname,
+    fullName = fullName,
+    position = position,
+    lastMatchStats = lastMatchStats
 )
