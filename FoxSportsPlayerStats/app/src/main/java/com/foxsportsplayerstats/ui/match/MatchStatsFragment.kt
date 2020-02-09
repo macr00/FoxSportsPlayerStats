@@ -2,6 +2,7 @@ package com.foxsportsplayerstats.ui.match
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,12 @@ class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
             .get(MatchStatsViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null)
+            viewModel.loadMatchStats()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +61,7 @@ class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
         viewModel.viewStateObservable()
             .takeUntil(viewLifecycleOwner.onDestroyObservable())
             .subscribe({ state ->
+                Log.d(TAG, "rendered")
                 state.render(this)
             }) { throwable ->
                 view.showErrorSnackbar(throwable)
