@@ -16,17 +16,17 @@ abstract class BaseViewModel<T> : ViewModel() {
     private val disposables = CompositeDisposable()
 
     fun accept(response: UseCaseResponse<T>?) {
-        viewState = when(response) {
-            is UseCaseResponse.Loading -> viewState.onLoading()
-            is UseCaseResponse.Success -> viewState.onSuccess(response.model)
-            is UseCaseResponse.Error -> viewState.onError(response.throwable)
-            else -> viewState
+        response?.let {
+            viewState = when(it) {
+                is UseCaseResponse.Loading -> viewState.onLoading()
+                is UseCaseResponse.Success -> viewState.onSuccess(it.model)
+                is UseCaseResponse.Error -> viewState.onError(it.throwable)
+            }
+            viewStatePublisher.onNext(viewState)
         }
-        viewStatePublisher.onNext(viewState)
     }
 
-    fun viewStateObservable(): Observable<ViewState<T>> =
-        viewStatePublisher
+    fun viewStateObservable(): Observable<ViewState<T>> = viewStatePublisher
             .onErrorResumeNext(Observable.empty())
             .distinctUntilChanged()
             .hide()
