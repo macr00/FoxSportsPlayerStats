@@ -2,7 +2,7 @@ package com.foxsportsplayerstats.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.foxsportsplayerstats.domain.UseCaseResponse
+import com.foxsportsplayerstats.domain.usecase.UseCaseResponse
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

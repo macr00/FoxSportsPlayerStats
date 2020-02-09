@@ -1,4 +1,4 @@
-package com.foxsportsplayerstats.domain
+package com.foxsportsplayerstats.domain.usecase
 
 sealed class UseCaseResponse<T> {
 

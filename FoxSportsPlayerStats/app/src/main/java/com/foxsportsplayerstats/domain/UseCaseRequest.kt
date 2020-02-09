@@ -1,3 +1,0 @@
-package com.foxsportsplayerstats.domain
-
-interface UseCaseRequest

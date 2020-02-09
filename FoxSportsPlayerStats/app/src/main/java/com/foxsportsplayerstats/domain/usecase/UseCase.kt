@@ -1,8 +1,6 @@
 package com.foxsportsplayerstats.domain.usecase
 
 import com.foxsportsplayerstats.domain.RxSchedulers
-import com.foxsportsplayerstats.domain.UseCaseRequest
-import com.foxsportsplayerstats.domain.UseCaseResponse
 import io.reactivex.Observable
 
 interface UseCase<R, T> where R : UseCaseRequest {

@@ -2,7 +2,6 @@ package com.foxsportsplayerstats.domain.usecase
 
 import com.foxsportsplayerstats.RxSchedulersTesting
 import com.foxsportsplayerstats.domain.Repository
-import com.foxsportsplayerstats.domain.UseCaseResponse
 import com.foxsportsplayerstats.domain.model.MatchStatModel
 import com.foxsportsplayerstats.domain.model.buildMatchStatModel
 import io.reactivex.Observable

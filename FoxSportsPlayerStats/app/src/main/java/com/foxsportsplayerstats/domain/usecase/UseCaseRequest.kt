@@ -1,0 +1,3 @@
+package com.foxsportsplayerstats.domain.usecase
+
+interface UseCaseRequest

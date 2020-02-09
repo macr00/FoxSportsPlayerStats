@@ -6,7 +6,8 @@ import io.reactivex.Observable
 import io.reactivex.functions.Function
 import javax.inject.Inject
 
-object GetMatchStatsRequest : UseCaseRequest
+object GetMatchStatsRequest :
+    UseCaseRequest
 
 class GetMatchStatsUseCase
 @Inject
