@@ -1,13 +1,7 @@
 package com.foxsportsplayerstats.domain.usecase
 
-import com.foxsportsplayerstats.domain.BaseUseCase
-import com.foxsportsplayerstats.domain.RxSchedulers
-import com.foxsportsplayerstats.domain.UseCaseRequest
-import com.foxsportsplayerstats.domain.UseCaseResponse
 import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
-import com.foxsportsplayerstats.network.FoxSportsApi
-import com.foxsportsplayerstats.network.PlayerDetailsData
-import com.foxsportsplayerstats.network.toModel
+import com.foxsportsplayerstats.domain.*
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 import javax.inject.Inject
@@ -21,17 +15,16 @@ class GetPlayerStatsUseCase
 @Inject
 constructor(
     schedulers: RxSchedulers,
-    private val api: FoxSportsApi
+    private val repository: Repository
 ) : BaseUseCase<GetPlayerStatsRequest, PlayerDetailsModel>(schedulers) {
 
     private val responseMapper =
-        Function<PlayerDetailsData, UseCaseResponse<PlayerDetailsModel>> { data ->
-            UseCaseResponse.Success(data.toModel())
+        Function<PlayerDetailsModel, UseCaseResponse<PlayerDetailsModel>> { data ->
+            UseCaseResponse.Success(data)
         }
 
     override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerDetailsModel>> {
-        return api.getPlayerDetailedStats(request.teamId.toString(), request.playerId.toString())
-            .map(responseMapper)
+        return repository.getPlayerStats(request).map(responseMapper)
     }
 
     companion object {

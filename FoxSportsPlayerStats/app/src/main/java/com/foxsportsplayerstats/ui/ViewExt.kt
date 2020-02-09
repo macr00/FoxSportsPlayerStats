@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.domain.model.TopPlayerStatModel
-import com.foxsportsplayerstats.network.FoxSportsApi
+import com.foxsportsplayerstats.data.network.FoxSportsApi
 import com.google.android.material.snackbar.Snackbar
 
 fun ViewGroup.inflate(resId: Int, attach: Boolean): View {

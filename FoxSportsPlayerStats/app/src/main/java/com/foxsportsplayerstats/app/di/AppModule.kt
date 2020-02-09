@@ -10,4 +10,7 @@ abstract class AppModule {
 
     @Binds
     abstract fun provideSchedulers(schedulers: RxSchedulersImpl): RxSchedulers
+
+    @Binds
+    abstract fun provideConfig(config: BuildConfiguriation): Config
 }

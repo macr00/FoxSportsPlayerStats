@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.domain.model.TopPlayerStatModel
-import com.foxsportsplayerstats.network.FoxSportsApi
+import com.foxsportsplayerstats.data.network.FoxSportsApi
 import com.foxsportsplayerstats.ui.displayNameAndJumperNo
 import com.foxsportsplayerstats.ui.inflate
 import com.foxsportsplayerstats.ui.loadPlayerHeadShot

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
 import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
-import com.foxsportsplayerstats.network.FoxSportsApi
+import com.foxsportsplayerstats.data.network.FoxSportsApi
 import com.foxsportsplayerstats.ui.*
 import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
 

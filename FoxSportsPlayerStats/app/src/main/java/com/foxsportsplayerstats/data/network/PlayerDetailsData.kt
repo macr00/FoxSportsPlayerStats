@@ -1,4 +1,4 @@
-package com.foxsportsplayerstats.network
+package com.foxsportsplayerstats.data.network
 
 import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
 import com.squareup.moshi.Json

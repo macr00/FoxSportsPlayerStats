@@ -1,6 +1,7 @@
 package com.foxsportsplayerstats.app.di
 
 import android.content.Context
+import com.foxsportsplayerstats.data.RepositoryModule
 import com.foxsportsplayerstats.ui.match.MatchStatsViewModel
 import com.foxsportsplayerstats.ui.player.PlayerStatsViewModel
 import dagger.BindsInstance
@@ -8,7 +9,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, NetworkModule::class])
+@Component(modules = [AppModule::class, RepositoryModule::class])
 interface AppComponent {
 
     @Component.Builder

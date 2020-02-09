@@ -1,6 +1,6 @@
-package com.foxsportsplayerstats.app.di
+package com.foxsportsplayerstats.data.network
 
-import com.foxsportsplayerstats.network.FoxSportsApi
+import com.foxsportsplayerstats.app.di.Config
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -13,10 +13,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class NetworkModule {
 
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(config: Config): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor()
-                .apply { level = HttpLoggingInterceptor.Level.BODY }
+                .apply {
+                    if (config.isDebug()) level = HttpLoggingInterceptor.Level.BODY
+                }
             )
             .build()
     }

@@ -1,4 +1,4 @@
-package com.foxsportsplayerstats.network
+package com.foxsportsplayerstats.data.network
 
 import io.reactivex.Observable
 import retrofit2.http.GET
