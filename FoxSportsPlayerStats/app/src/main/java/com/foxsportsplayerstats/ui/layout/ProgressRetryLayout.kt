@@ -21,13 +21,13 @@ class ProgressRetryLayout
     fun showProgress(show: Boolean) {
         visibility = View.VISIBLE
         progress.visibleOrGone(show)
-        retry_btn.visibleOrGone(!show)
+        retry_btn.visibleOrGone(false)
     }
 
     fun showRetry(show: Boolean) {
         visibility = View.VISIBLE
         retry_btn.visibleOrGone(show)
-        progress.visibleOrGone(!show)
+        progress.visibleOrGone(false)
     }
 
     fun setRetryClickListener(action: () -> Unit) {
