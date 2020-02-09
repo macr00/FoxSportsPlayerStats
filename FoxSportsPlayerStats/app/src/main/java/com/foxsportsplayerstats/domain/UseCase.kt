@@ -15,6 +15,8 @@ abstract class BaseUseCase<R,T>(
 
     override fun apply(request: R): Observable<UseCaseResponse<T>> {
         return useCaseObservable(request)
+            .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
+            .startWith(UseCaseResponse.Loading())
             .subscribeOn(schedulers.io)
             .observeOn(schedulers.main)
     }

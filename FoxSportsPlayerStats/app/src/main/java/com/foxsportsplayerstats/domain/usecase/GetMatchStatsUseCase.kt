@@ -29,8 +29,6 @@ constructor(
     ): Observable<UseCaseResponse<List<MatchStatModel>>> {
         return api.getMatchStats()
             .map(responseMapper)
-            .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
-            .startWith(UseCaseResponse.Loading())
     }
 
     companion object {

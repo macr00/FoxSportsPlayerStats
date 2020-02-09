@@ -32,8 +32,6 @@ constructor(
     override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerDetailsModel>> {
         return api.getPlayerDetailedStats(request.teamId.toString(), request.playerId.toString())
             .map(responseMapper)
-            .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
-            .startWith(UseCaseResponse.Loading())
     }
 
     companion object {
