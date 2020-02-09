@@ -9,8 +9,8 @@ data class TopPlayerData(
     val id: Int,
     val position: String,
     @Json(name = "short_name") val shortName: String,
-    @Json(name = "stat_value") val statValue : String,
-    @Json(name = "jumper_number") val jumperNumber: String
+    @Json(name = "stat_value") val statValue : Int,
+    @Json(name = "jumper_number") val jumperNumber: Int
 )
 
 fun TopPlayerData.toModel(teamId: Int) = TopPlayerStatModel(

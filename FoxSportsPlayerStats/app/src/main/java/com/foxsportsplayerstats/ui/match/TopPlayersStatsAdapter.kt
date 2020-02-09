@@ -48,7 +48,7 @@ class TopPlayersStatsAdapter(
         val id = topPlayer.id
 
         with(viewHolder) {
-            statView.text = topPlayer.statValue
+            statView.text = topPlayer.statValue.toString()
             playerPositionView.text = topPlayer.position
             nameNumberView.displayNameAndJumperNo(topPlayer)
             parent.loadPlayerHeadShot(imageView, FoxSportsApi.getImgUrl(id))

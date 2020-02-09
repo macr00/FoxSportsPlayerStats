@@ -66,7 +66,7 @@ fun View.loadEmptyHeadShot(imageView: ImageView) {
 
 fun TextView.displayNameAndJumperNo(topPlayer: TopPlayerStatModel) {
     with(topPlayer) {
-        text = context.resources.getString(R.string.player_name_jumper, jumperNumber, name)
+        text = context.resources.getString(R.string.player_name_jumper, jumperNumber.toString(), name)
     }
 }
 
