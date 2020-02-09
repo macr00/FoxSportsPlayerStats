@@ -2,7 +2,6 @@ package com.foxsportsplayerstats.ui.match
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
-import com.foxsportsplayerstats.domain.model.MatchStatsModel
+import com.foxsportsplayerstats.domain.model.MatchStatModel
 import com.foxsportsplayerstats.ui.UiView
 import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
 import com.foxsportsplayerstats.ui.onDestroyObservable
 import com.foxsportsplayerstats.ui.showErrorSnackbar
 import com.foxsportsplayerstats.ui.visibleOrGone
 
-class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
+class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
 
     companion object {
         const val TAG = "MatchStatsFragment"
@@ -65,8 +64,8 @@ class MatchStatsFragment : Fragment(), UiView<MatchStatsModel> {
             }
     }
 
-    override fun displayModel(model: MatchStatsModel) {
-        matchStatsAdapter.loadItems(model.matchStats)
+    override fun displayModel(model: List<MatchStatModel>) {
+        matchStatsAdapter.loadItems(model)
     }
 
     override fun displayProgress(isLoading: Boolean) {

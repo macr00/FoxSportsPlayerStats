@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
-import com.foxsportsplayerstats.network.MatchStat
+import com.foxsportsplayerstats.domain.model.MatchStatModel
 import com.foxsportsplayerstats.ui.inflate
 import com.foxsportsplayerstats.ui.layout.ListLayout
 
 class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
 
-    private var items: List<MatchStat> = listOf()
+    private var items: List<MatchStatModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.match_stat_item_layout, false))
@@ -25,7 +25,7 @@ class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
         holder.bind(items[position])
     }
 
-    fun loadItems(items: List<MatchStat>) {
+    fun loadItems(items: List<MatchStatModel>) {
         this.items = items
         notifyDataSetChanged()
     }
@@ -36,11 +36,11 @@ class MatchStatsAdapter : RecyclerView.Adapter<MatchStatsAdapter.ViewHolder>() {
         private val teamAList = itemView.findViewById<ListLayout>(R.id.team_a_list)
         private val teamBList = itemView.findViewById<ListLayout>(R.id.team_b_list)
 
-        fun bind(matchStat: MatchStat) {
-            with(matchStat) {
-                statTitle.text = matchStat.statType.replace("_", " ")
-                teamAList.setAdapter(TopPlayersListAdapter(itemView.context, teamA.topPlayers, teamA.id))
-                teamBList.setAdapter(TopPlayersListAdapter(itemView.context, teamB.topPlayers, teamB.id, true))
+        fun bind(matchStatData: MatchStatModel) {
+            with(matchStatData) {
+                statTitle.text = matchStatData.statType.replace("_", " ")
+                teamAList.setAdapter(TopPlayersStatsAdapter(itemView.context, teamA.topPlayerStats))
+                teamBList.setAdapter(TopPlayersStatsAdapter(itemView.context, teamB.topPlayerStats, true))
             }
         }
     }

@@ -18,8 +18,8 @@ interface FoxSportsApi {
     }
 
     @GET("matches/NRL20190101/topplayerstats.json;type=fantasy_points;type=tackles;type=runs;type=run_metres?limit=5&userkey=A00239D3-45F6-4A0A-810C-54A347F144C2")
-    fun getMatchStats(): Observable<List<MatchStat>>
+    fun getMatchStats(): Observable<List<MatchStatData>>
 
     @GET("series/1/seasons/117/teams/{team_id}/players/{player_id}/detailedstats.json?&userkey=9024ec15-d791-4bfd-aa3b-5bcf5d36da4f")
-    fun getPlayerDetailedStats(@Path("team_id") teamId: String, @Path("player_id") playerId: String): Observable<PlayerDetailedStats>
+    fun getPlayerDetailedStats(@Path("team_id") teamId: String, @Path("player_id") playerId: String): Observable<PlayerDetailsData>
 }

@@ -2,12 +2,11 @@ package com.foxsportsplayerstats
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.foxsportsplayerstats.ui.match.MatchStatsFragment
-import com.foxsportsplayerstats.ui.match.TopPlayersListAdapter
+import com.foxsportsplayerstats.ui.match.TopPlayersStatsAdapter
 import com.foxsportsplayerstats.ui.player.PlayerStatsFragment
 
-class MainActivity : AppCompatActivity(), TopPlayersListAdapter.Listener {
+class MainActivity : AppCompatActivity(), TopPlayersStatsAdapter.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

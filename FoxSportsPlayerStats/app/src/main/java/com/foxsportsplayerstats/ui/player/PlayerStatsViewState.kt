@@ -1,15 +1,15 @@
 package com.foxsportsplayerstats.ui.player
 
-import com.foxsportsplayerstats.domain.model.PlayerStatsModel
+import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
 import com.foxsportsplayerstats.ui.UiView
 
 data class PlayerStatsViewState(
-    val model: PlayerStatsModel? = null,
+    val model: PlayerDetailsModel? = null,
     val isLoading: Boolean = false,
     val error: Throwable? = null
 ) {
 
-    fun render(view: UiView<PlayerStatsModel>) {
+    fun render(view: UiView<PlayerDetailsModel>) {
         view.run {
             displayProgress(isLoading)
 

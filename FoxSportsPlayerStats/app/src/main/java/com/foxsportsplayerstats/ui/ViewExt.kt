@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.foxsportsplayerstats.R
+import com.foxsportsplayerstats.domain.model.TopPlayerStatModel
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.google.android.material.snackbar.Snackbar
 
@@ -62,6 +64,9 @@ fun View.loadEmptyHeadShot(imageView: ImageView) {
         .into(imageView)
 }
 
-fun String.capitalizeWords(): String =
-    split("_").joinToString(" ") { it.capitalize() }
+fun TextView.displayNameAndJumperNo(topPlayer: TopPlayerStatModel) {
+    with(topPlayer) {
+        text = context.resources.getString(R.string.player_name_jumper, jumperNumber, name)
+    }
+}
 

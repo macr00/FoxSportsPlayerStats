@@ -2,9 +2,9 @@ package com.foxsportsplayerstats.ui.player
 
 import android.util.Log
 import com.foxsportsplayerstats.domain.UseCaseResponse
-import com.foxsportsplayerstats.domain.model.PlayerStatsModel
-import com.foxsportsplayerstats.domain.player.GetPlayerStatsRequest
-import com.foxsportsplayerstats.domain.player.GetPlayerStatsUseCase
+import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
+import com.foxsportsplayerstats.domain.usecase.GetPlayerStatsRequest
+import com.foxsportsplayerstats.domain.usecase.GetPlayerStatsUseCase
 import com.foxsportsplayerstats.ui.BaseViewModel
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -24,7 +24,12 @@ constructor(
     private val viewStatePublisher = BehaviorSubject.create<PlayerStatsViewState>()
 
     fun loadPlayer(teamId: Int, playerId: Int) {
-        getPlayerStatsUseCase.apply(GetPlayerStatsRequest(teamId = teamId, playerId = playerId))
+        getPlayerStatsUseCase.apply(
+            GetPlayerStatsRequest(
+                teamId = teamId,
+                playerId = playerId
+            )
+        )
             .subscribe({ response ->
                 when(response) {
                     is UseCaseResponse.Loading -> onLoading()
@@ -49,7 +54,7 @@ constructor(
         viewStatePublisher.onNext(viewState)
     }
 
-    private fun onSuccess(model: PlayerStatsModel) {
+    private fun onSuccess(model: PlayerDetailsModel) {
         viewState = viewState.copy(isLoading = false, error = null, model = model)
         viewStatePublisher.onNext(viewState)
     }

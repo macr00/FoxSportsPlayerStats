@@ -2,9 +2,9 @@ package com.foxsportsplayerstats.ui.match
 
 import android.util.Log
 import com.foxsportsplayerstats.domain.UseCaseResponse
-import com.foxsportsplayerstats.domain.match.GetMatchStatsRequest
-import com.foxsportsplayerstats.domain.match.GetMatchStatsUseCase
-import com.foxsportsplayerstats.domain.model.MatchStatsModel
+import com.foxsportsplayerstats.domain.usecase.GetMatchStatsRequest
+import com.foxsportsplayerstats.domain.usecase.GetMatchStatsUseCase
+import com.foxsportsplayerstats.domain.model.MatchStatModel
 import com.foxsportsplayerstats.ui.BaseViewModel
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -53,7 +53,7 @@ constructor(
         viewStatePublisher.onNext(viewState)
     }
 
-    private fun onSuccess(model: MatchStatsModel) {
+    private fun onSuccess(model: List<MatchStatModel>) {
         viewState = viewState.copy(isLoading = false, error = null, model = model)
         viewStatePublisher.onNext(viewState)
     }

@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
-import com.foxsportsplayerstats.domain.model.PlayerStatsModel
+import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
 import com.foxsportsplayerstats.network.FoxSportsApi
 import com.foxsportsplayerstats.ui.*
 import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
 
-class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
+class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
 
     companion object {
         const val TAG = "PlayerStatsFragment"
@@ -87,16 +87,16 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerStatsModel> {
         }
     }
 
-    override fun displayModel(model: PlayerStatsModel) {
+    override fun displayModel(model: PlayerDetailsModel) {
         val log = model.toString()
         Log.d(TAG, log)
         view?.run {
-            findViewById<TextView>(R.id.player_full_name)?.text = model.data.fullName
-            findViewById<TextView>(R.id.player_position)?.text = model.data.position
-            playerStatsAdapter.loadItems(model.data.getLastMatchStatPairs())
+            findViewById<TextView>(R.id.player_full_name)?.text = model.fullName
+            findViewById<TextView>(R.id.player_position)?.text = model.position
+            playerStatsAdapter.loadItems(model.lastMatchStats)
             loadPlayerHeadShot(
                 findViewById(R.id.player_head_shot),
-                FoxSportsApi.getImgUrl(model.data.id)
+                FoxSportsApi.getImgUrl(model.id)
             )
         }
     }

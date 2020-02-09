@@ -1,12 +1,13 @@
-package com.foxsportsplayerstats.domain.player
+package com.foxsportsplayerstats.domain.usecase
 
 import com.foxsportsplayerstats.domain.BaseUseCase
 import com.foxsportsplayerstats.domain.RxSchedulers
 import com.foxsportsplayerstats.domain.UseCaseRequest
 import com.foxsportsplayerstats.domain.UseCaseResponse
-import com.foxsportsplayerstats.domain.model.PlayerStatsModel
+import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
 import com.foxsportsplayerstats.network.FoxSportsApi
-import com.foxsportsplayerstats.network.PlayerDetailedStats
+import com.foxsportsplayerstats.network.PlayerDetailsData
+import com.foxsportsplayerstats.network.toModel
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 import javax.inject.Inject
@@ -21,17 +22,21 @@ class GetPlayerStatsUseCase
 constructor(
     schedulers: RxSchedulers,
     private val api: FoxSportsApi
-) : BaseUseCase<GetPlayerStatsRequest, PlayerStatsModel>(schedulers) {
+) : BaseUseCase<GetPlayerStatsRequest, PlayerDetailsModel>(schedulers) {
 
     private val responseMapper =
-        Function<PlayerDetailedStats, UseCaseResponse<PlayerStatsModel>> { stats ->
-            UseCaseResponse.Success(PlayerStatsModel(stats))
+        Function<PlayerDetailsData, UseCaseResponse<PlayerDetailsModel>> { data ->
+            UseCaseResponse.Success(data.toModel())
         }
 
-    override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerStatsModel>> {
+    override fun useCaseObservable(request: GetPlayerStatsRequest): Observable<UseCaseResponse<PlayerDetailsModel>> {
         return api.getPlayerDetailedStats(request.teamId.toString(), request.playerId.toString())
             .map(responseMapper)
             .onErrorReturn { t: Throwable -> UseCaseResponse.Error(t) }
             .startWith(UseCaseResponse.Loading())
+    }
+
+    companion object {
+        const val TAG = "GetPlayerStatsUseCase"
     }
 }
