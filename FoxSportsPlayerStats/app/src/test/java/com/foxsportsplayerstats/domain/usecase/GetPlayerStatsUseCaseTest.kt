@@ -11,7 +11,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito.*
 
-class GetPlayerStatsRequestTest {
+class GetPlayerStatsUseCaseTest {
 
     private val testScheduler = TestScheduler()
     private val scheduler = RxSchedulersTesting(testScheduler)
@@ -53,10 +53,10 @@ class GetPlayerStatsRequestTest {
 
         verify(repository).getPlayerStats(request)
 
-        observer.assertComplete()
-        observer.assertNoErrors()
-
         Assert.assertTrue(observer.values()[0] is UseCaseResponse.Loading)
         Assert.assertEquals(UseCaseResponse.Error<MatchStatModel>(error), observer.values()[1])
+
+        observer.assertComplete()
+        observer.assertNoErrors()
     }
 }

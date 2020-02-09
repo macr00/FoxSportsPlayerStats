@@ -58,10 +58,10 @@ class GetMatchStatsUseCaseTest {
 
         verify(repository).getMatchStats()
 
-        observer.assertComplete()
-        observer.assertNoErrors()
-
         Assert.assertTrue(observer.values()[0] is UseCaseResponse.Loading)
         Assert.assertEquals(UseCaseResponse.Error<MatchStatModel>(error), observer.values()[1])
+
+        observer.assertComplete()
+        observer.assertNoErrors()
     }
 }
