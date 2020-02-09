@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.foxsportsplayerstats.R
 import com.foxsportsplayerstats.app.injector
 import com.foxsportsplayerstats.domain.model.MatchStatModel
-import com.foxsportsplayerstats.ui.UiView
+import com.foxsportsplayerstats.ui.*
 import com.foxsportsplayerstats.ui.layout.ProgressRetryLayout
-import com.foxsportsplayerstats.ui.onDestroyObservable
-import com.foxsportsplayerstats.ui.showErrorSnackbar
-import com.foxsportsplayerstats.ui.visibleOrGone
 
 class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
 
@@ -68,18 +65,18 @@ class MatchStatsFragment : Fragment(), UiView<List<MatchStatModel>> {
         matchStatsAdapter.loadItems(model)
     }
 
-    override fun displayProgress(isLoading: Boolean) {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showProgress(isLoading)
+    override fun displayProgress() {
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showProgress()
     }
 
     override fun displayError(throwable: Throwable) {
         view?.run {
-            findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry(true)
+            findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry()
             showErrorSnackbar(throwable)
         }
     }
 
     override fun hideProgressRetry() {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.visibleOrGone(false)
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.gone()
     }
 }

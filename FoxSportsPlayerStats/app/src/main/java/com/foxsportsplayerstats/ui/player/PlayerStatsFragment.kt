@@ -23,7 +23,6 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
 
     companion object {
         const val TAG = "PlayerStatsFragment"
-
         private const val TEAM_ID_PARAM = "teamId"
         private const val PLAYER_ID_PARAM = "playerId"
 
@@ -88,8 +87,6 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
     }
 
     override fun displayModel(model: PlayerDetailsModel) {
-        val log = model.toString()
-        Log.d(TAG, log)
         view?.run {
             findViewById<TextView>(R.id.player_full_name)?.text = model.fullName
             findViewById<TextView>(R.id.player_position)?.text = model.position
@@ -101,16 +98,18 @@ class PlayerStatsFragment : Fragment(), UiView<PlayerDetailsModel> {
         }
     }
 
-    override fun displayProgress(isLoading: Boolean) {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showProgress(isLoading)
+    override fun displayProgress() {
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showProgress()
     }
 
     override fun displayError(throwable: Throwable) {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry(true)
-        view?.showErrorSnackbar(throwable)
+        view?.run {
+            findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.showRetry()
+            showErrorSnackbar(throwable)
+        }
     }
 
     override fun hideProgressRetry() {
-        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.visibleOrGone(false)
+        view?.findViewById<ProgressRetryLayout>(R.id.progress_retry_layout)?.gone()
     }
 }
