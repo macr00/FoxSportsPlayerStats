@@ -1,27 +1,11 @@
 package com.foxsportsplayerstats.ui.player
 
 import com.foxsportsplayerstats.domain.model.PlayerDetailsModel
-import com.foxsportsplayerstats.ui.UiView
+import com.foxsportsplayerstats.ui.ViewState
 
 data class PlayerStatsViewState(
     val model: PlayerDetailsModel? = null,
-    val isLoading: Boolean = false,
-    val error: Throwable? = null
-) {
-
-    fun render(view: UiView<PlayerDetailsModel>) {
-        view.run {
-            if (model != null) {
-                hideProgressRetry()
-                displayModel(model)
-            }
-
-            if (isLoading)
-                displayProgress()
-
-            if (error != null)
-                displayError(error)
-        }
-    }
-}
+    val error: Throwable? = null,
+    val isLoading: Boolean = false
+) : ViewState<PlayerDetailsModel>(model, error, isLoading)
 

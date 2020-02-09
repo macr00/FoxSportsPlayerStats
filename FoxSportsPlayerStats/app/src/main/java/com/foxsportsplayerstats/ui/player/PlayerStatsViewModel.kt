@@ -24,14 +24,9 @@ constructor(
     private val viewStatePublisher = BehaviorSubject.create<PlayerStatsViewState>()
 
     fun loadPlayer(teamId: Int, playerId: Int) {
-        getPlayerStatsUseCase.apply(
-            GetPlayerStatsRequest(
-                teamId = teamId,
-                playerId = playerId
-            )
-        )
+        getPlayerStatsUseCase.apply(GetPlayerStatsRequest(teamId, playerId))
             .subscribe({ response ->
-                when(response) {
+                when (response) {
                     is UseCaseResponse.Loading -> onLoading()
                     is UseCaseResponse.Success -> onSuccess(response.model)
                     is UseCaseResponse.Error -> onError(response.throwable)
