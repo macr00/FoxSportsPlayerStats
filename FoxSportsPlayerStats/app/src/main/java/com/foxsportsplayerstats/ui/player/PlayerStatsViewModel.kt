@@ -22,7 +22,7 @@ constructor(
 
     fun loadPlayer(teamId: Int, playerId: Int) {
         getPlayerStatsUseCase.apply(GetPlayerStatsRequest(teamId, playerId))
-            .subscribe( { response -> accept(response) }, { t -> onError(t, TAG) })
+            .subscribe({ response -> accept(response) }, { t -> onError(t, TAG) })
             .disposeOnCleared()
     }
 }

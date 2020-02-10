@@ -22,7 +22,7 @@ constructor(
 
     fun loadMatchStats() {
         getMatchStatsUseCase.apply(GetMatchStatsRequest)
-            .subscribe( { response -> accept(response) }, { t -> onError(t, TAG) })
+            .subscribe({ response -> accept(response) }, { t -> onError(t, TAG) })
             .disposeOnCleared()
     }
 }
