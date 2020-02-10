@@ -11,7 +11,7 @@ import io.reactivex.subjects.BehaviorSubject
 abstract class BaseViewModel<T> : ViewModel() {
 
     protected lateinit var viewState: ViewState<T>
-    private val viewStatePublisher = BehaviorSubject.create<ViewState<T>>()
+    private val viewStateSubject = BehaviorSubject.create<ViewState<T>>()
 
     private val disposables = CompositeDisposable()
 
@@ -22,11 +22,11 @@ abstract class BaseViewModel<T> : ViewModel() {
                 is UseCaseResponse.Success -> viewState.onSuccess(it.model)
                 is UseCaseResponse.Error -> viewState.onError(it.throwable)
             }
-            viewStatePublisher.onNext(viewState)
+            viewStateSubject.onNext(viewState)
         }
     }
 
-    fun viewStateObservable(): Observable<ViewState<T>> = viewStatePublisher
+    fun viewStateObservable(): Observable<ViewState<T>> = viewStateSubject
             .onErrorResumeNext(Observable.empty())
             .distinctUntilChanged()
             .hide()
@@ -34,7 +34,7 @@ abstract class BaseViewModel<T> : ViewModel() {
     fun onError(t: Throwable, tag: String) {
         Log.e(tag, t.localizedMessage ?: "Unknown Error!")
         viewState = viewState.onError(t)
-        viewStatePublisher.onNext(viewState)
+        viewStateSubject.onNext(viewState)
     }
 
     override fun onCleared() {
