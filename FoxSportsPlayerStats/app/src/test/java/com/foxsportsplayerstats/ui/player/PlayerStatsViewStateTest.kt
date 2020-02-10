@@ -41,7 +41,7 @@ class PlayerStatsViewStateTest {
     }
 
     @Test
-    fun whenSuccessUiViewDisplayLoadingHideError() {
+    fun whenSuccessUiViewDisplayModelHideProgressRetry() {
         val model = buildPlayerDetailsModel()
         val errorState = viewState.onSuccess(model)
 

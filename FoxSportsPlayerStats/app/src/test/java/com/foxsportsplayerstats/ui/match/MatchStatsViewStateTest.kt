@@ -5,12 +5,14 @@ import com.foxsportsplayerstats.domain.model.buildMatchStatModel
 import com.foxsportsplayerstats.ui.UiView
 import com.nhaarman.mockitokotlin2.any
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.never
 
 class MatchStatsViewStateTest {
 
     @Suppress("UNCHECKED_CAST")
-    private val uiView = Mockito.mock(UiView::class.java) as UiView<List<MatchStatModel>>
+    private val uiView = mock(UiView::class.java) as UiView<List<MatchStatModel>>
     private var viewState = MatchStatsViewState()
 
     @Test
@@ -19,9 +21,9 @@ class MatchStatsViewStateTest {
 
         loadingState.render(uiView)
 
-        Mockito.verify(uiView).displayProgress()
-        Mockito.verify(uiView, Mockito.never()).displayError(any())
-        Mockito.verify(uiView, Mockito.never()).displayModel(any())
+        verify(uiView).displayProgress()
+        verify(uiView, never()).displayError(any())
+        verify(uiView, never()).displayModel(any())
     }
 
     @Test
@@ -31,13 +33,13 @@ class MatchStatsViewStateTest {
 
         errorState.render(uiView)
 
-        Mockito.verify(uiView).displayError(error)
-        Mockito.verify(uiView, Mockito.never()).displayProgress()
-        Mockito.verify(uiView, Mockito.never()).displayModel(any())
+        verify(uiView).displayError(error)
+        verify(uiView, never()).displayProgress()
+        verify(uiView, never()).displayModel(any())
     }
 
     @Test
-    fun whenSuccessUiViewDisplayLoadingHideError() {
+    fun whenSuccessUiViewDisplayModelHideProgressRetry() {
         val model = listOf(
             buildMatchStatModel(id = "match_stat1"),
             buildMatchStatModel(id = "match_stat2")
@@ -46,8 +48,9 @@ class MatchStatsViewStateTest {
 
         errorState.render(uiView)
 
-        Mockito.verify(uiView, Mockito.never()).displayProgress()
-        Mockito.verify(uiView, Mockito.never()).displayError(any())
-        Mockito.verify(uiView).displayModel(model)
+        verify(uiView, never()).displayProgress()
+        verify(uiView, never()).displayError(any())
+        verify(uiView).displayModel(model)
+        verify(uiView).hideProgressRetry()
     }
 }
